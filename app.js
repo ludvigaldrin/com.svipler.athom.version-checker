@@ -2,6 +2,7 @@
 
 const Homey = require('homey');
 const { HomeyAPI } = require('athom-api');
+const webParser = require('./webparse');
 
 class VersionChecker extends Homey.App {
   /**
@@ -12,16 +13,21 @@ class VersionChecker extends Homey.App {
     const homeyAPI = await this.login();
     this.log('Logged in');
     const appsList = await homeyAPI.apps.getApps();
-    //this.log("Apps fetched: " + appsList.length);
-    var count = Object.keys(appsList).length();
-    this.log("Number of apps fetched: " + count);
-    //this.checkApps(appsList);
+    this.checkApps(appsList);
+
+    
   }
 
   checkApps(apps){
-    for (i = 0; i < apps.length; i++) {
-      this.log(apps[i]);
-      break;
+    for (const key in apps) {
+      const app = apps[key];
+      //console.log(`${property}: ${object[property]}`);
+      //this.log(app);
+      this.log("App: " + app.name+ " (" + app.id+") - " + app.origin);
+      //this.log("--Current Version: " + app.version + " (" + app.channel+")");
+      if (app.origin === "appstore"){
+        webParser.appCheck(this, app);
+      }
     }
   }
  
