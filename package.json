@@ -1,0 +1,15 @@
+{
+  "name": "com.svipler.athom.version-checker",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {
+    "homey": "^2.9.0"
+  },
+  "dependencies": {
+    "athom-api": "^3.2.13",
+    "cheerio": "^1.0.0-rc.3",
+    "puppeteer": "^5.3.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
